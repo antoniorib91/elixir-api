@@ -9,3 +9,13 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+
+alias Api.Repo
+alias Api.Bank.Account
+
+Repo.insert!(%Account{
+  name: "John Doe",
+  balance: 55.2,
+  status: 1
+})

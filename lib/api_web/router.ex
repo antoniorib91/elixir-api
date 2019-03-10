@@ -7,5 +7,10 @@ defmodule ApiWeb.Router do
 
   scope "/api", ApiWeb do
     pipe_through :api
+    scope "/v1" do
+      scope "/accounts" do
+        get "/all", AccountController, :index
+      end
+    end
   end
 end
