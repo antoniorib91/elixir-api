@@ -45,10 +45,11 @@ defmodule ApiWeb.AccountController do
   def transfer(conn, %{"from" => account_from_id, "to" => account_to_id, "ammount" => ammount}) do
 
     with {:ok, %Account{}} <- AccountActions.transfer(account_from_id, account_to_id, ammount) do
-      conn
-      |> put_status(:ok)
-      |> send_resp
+      send_resp(conn, :ok, "ok")
     end
+  end
+
+  def deposit do
 
   end
 end

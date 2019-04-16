@@ -11,6 +11,10 @@ defmodule ApiWeb.Router do
       scope "/accounts" do
         get "/all", AccountController, :index
       end
+      scope "/account" do
+        put "/deposit", AccountController, :deposit
+        post "/transfer", AccountController, :transfer
+      end
     end
   end
 end
