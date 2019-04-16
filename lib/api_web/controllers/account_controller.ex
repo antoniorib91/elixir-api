@@ -22,13 +22,13 @@ defmodule ApiWeb.AccountController do
   end
 
   def show(conn, %{"id" => id}) do
+  @spec show(Plug.Conn.t(), map()) :: Plug.Conn.t()
     account = Bank.get_account!(id)
     render(conn, "show.json", account: account)
   end
 
   def update(conn, %{"id" => id, "account" => account_params}) do
     account = Bank.get_account!(id)
-
     with {:ok, %Account{} = account} <- Bank.update_account(account, account_params) do
       render(conn, "show.json", account: account)
     end
@@ -36,20 +36,27 @@ defmodule ApiWeb.AccountController do
 
   def delete(conn, %{"id" => id}) do
     account = Bank.get_account!(id)
-
     with {:ok, %Account{}} <- Bank.delete_account(account) do
       send_resp(conn, :no_content, "")
     end
   end
 
   def transfer(conn, %{"from" => account_from_id, "to" => account_to_id, "ammount" => ammount}) do
-
     with {:ok, %Account{}} <- AccountActions.transfer(account_from_id, account_to_id, ammount) do
       send_resp(conn, :ok, "ok")
     end
   end
 
-  def deposit do
-
+  def deposit(conn, %{"account" => account_id, "ammount" => ammount})do
+    with {:ok, %Account{}} <- AccountActions.deposit(account_id, ammount) do
+      send_resp(conn, :ok, "success")
+    end
   end
+
+  def withdraw(conn, %{"account" => account_id, "ammount" => ammount})do
+    with {:ok, %Account{}} <- AccountActions.withdraw(account_id, ammount) do
+      send_resp(conn, :ok, "success")
+    end
+  end
+
 end

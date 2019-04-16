@@ -13,6 +13,7 @@ defmodule ApiWeb.Router do
       end
       scope "/account" do
         put "/deposit", AccountController, :deposit
+        put "/withdraw", AccountController, :withdraw
         post "/transfer", AccountController, :transfer
       end
     end

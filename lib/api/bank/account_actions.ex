@@ -8,7 +8,6 @@ defmodule Api.Bank.Account.AccountActions do
     deposit(to_id, ammount)
   end
 
-
   def withdraw(id, ammount) do
     account = Bank.get_account!(id)
     new_balance = account.balance - ammount
