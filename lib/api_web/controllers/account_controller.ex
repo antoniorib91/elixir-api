@@ -59,4 +59,9 @@ defmodule ApiWeb.AccountController do
     end
   end
 
+  def summary(conn, %{"id" => id}) do
+    account = Bank.get_account!(id)
+    render(conn, "summary.json", account: account)
+  end
+
 end

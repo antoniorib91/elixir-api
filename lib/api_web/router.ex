@@ -8,10 +8,9 @@ defmodule ApiWeb.Router do
   scope "/api", ApiWeb do
     pipe_through :api
     scope "/v1" do
-      scope "/accounts" do
-        get "/all", AccountController, :index
-      end
       scope "/account" do
+        get "/all", AccountController, :index
+        get "/:id/summary", AccountController, :summary
         put "/deposit", AccountController, :deposit
         put "/withdraw", AccountController, :withdraw
         post "/transfer", AccountController, :transfer
